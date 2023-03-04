@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 12:51:49 by msodor            #+#    #+#             */
-/*   Updated: 2023/03/03 23:16:39 by msodor           ###   ########.fr       */
+/*   Updated: 2023/03/04 23:22:09 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,21 @@ typedef struct s_map
 	char **map;
 	int x;
 	int y;
+	int E_count;
+	int P_count;
+	int C_count;
 } t_map;
 
+typedef struct s_player
+{
+	int x;
+	int y;
+} t_player;
+
 t_map *map(int fd);
-int setchr(char *set, char c);
-int check_comp(t_map *map_info);
-int closed_rec(t_map *map_info);
+int check_comp(t_map *map);
+int closed_rec(t_map *map);
+char **fill_path(t_map *map, int x, int y);
+t_player *position(char **map);
 
 #endif
