@@ -12,9 +12,9 @@
 
 #include "so_long.h"
 
-t_player *position(char **map)
+t_player	*position(char **map)
 {
-	t_player *player;
+	t_player	*player;
 
 	player = malloc(sizeof(t_player));
 	if (!player)
@@ -34,29 +34,41 @@ t_player *position(char **map)
 	return (0);
 }
 
-char **fill_path(t_map *map, int x, int y)
+char	**fill_around(t_map *map, int x, int y)
 {
 	map->map[y][x] = 'X';
-	if (ft_strchr("P0E", map->map[y - 1][x]))
-		map->map[y - 1][x] = 'X';
-	if (ft_strchr("P0E", map->map[y - 1][x - 1]))
-		map->map[y - 1][x - 1] = 'X';
-	if (ft_strchr("P0E", map->map[y - 1][x + 1]))
-		map->map[y - 1][x + 1] = 'X';
-	if (ft_strchr("P0E", map->map[y + 1][x]))
-		map->map[y + 1][x] = 'X';
-	if (ft_strchr("P0E", map->map[y + 1][x - 1]))
-		map->map[y + 1][x - 1] = 'X';
-	if (ft_strchr("P0E", map->map[y + 1][x + 1]))
-		map->map[y + 1][x + 1] = 'X';
-	if (ft_strchr("P0E", map->map[y][x + 1]))
-		map->map[y][x + 1] = 'X';
-	if (ft_strchr("P0E", map->map[y][x - 1]))
-		map->map[y][x - 1] = 'X';
+	if (ft_strchr("0EC", map->map[y - 1][x]))
+		fill_around(map, x, y - 1);
+	if (ft_strchr("0EC", map->map[y + 1][x]))
+		fill_around(map, x, y + 1);
+	if (ft_strchr("0EC", map->map[y][x + 1]))
+		fill_around(map, x + 1, y);
+	if (ft_strchr("0EC", map->map[y][x - 1]))
+		fill_around(map, x - 1, y);
 	return (map->map);
 }
 
-char **fill_all(t_map *map, t_player *player)
+void	check_map(t_map *map)
 {
-	int
+	map->y = 0;
+	map->P_count = 0;
+	map->E_count = 0;
+	map->C_count = 0;
+	while (map->map[map->y])
+	{
+		map->x = 0;
+		while (map->map[map->y][map->x])
+		{
+			if (map->map[map->y][map->x] == 'P')
+				map->P_count++;
+			if (map->map[map->y][map->x] == 'E')
+				map->E_count++;
+			if (map->map[map->y][map->x] == 'C')
+				map->C_count++;
+			map->x++;
+		}
+		map->y++;
+	}
+	if (map->C_count != 0 || map->E_count != 0 || map->P_count != 0)
+		error();
 }

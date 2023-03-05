@@ -12,21 +12,26 @@
 
 #include "so_long.h"
 
-int main()
+void	check_all(t_map *map_info)
 {
-    int fd = open("map", O_RDONLY);
-    t_map *map_info = map(fd);
-    if (check_comp(map_info) || closed_rec(map_info))
-        printf("not valid\n");
-    printf("valid\n");
-    t_player *player = position(map_info->map);
-    // printf("%d\n", player->y);
-    // printf("%d\n", player->x);
-    map_info->map = fill_path(map_info, player);
-    int i = 0;
-    while (map_info->map[i])
-    {
-        printf("%s\n", map_info->map[i]);
-        i++;
-    }
+	t_player *player;
+
+	player = position(map_info->map);
+	closed_rec(map_info);
+	check_comp(map_info);
+	map_info->map = fill_around(map_info, player->x, player->y);
+	check_map(map_info);
+}
+int main(int ac, char **av)
+{
+	t_map *map_info;
+	int fd = open(av[1], O_RDONLY);
+	map_info = map(fd);
+	check_all(map_info);
+	int i = 0;
+	while (map_info->map[i])
+	{
+		printf("%s\n", map_info->map[i]);
+		i++;
+	}
 }

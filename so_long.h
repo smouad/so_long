@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: msodor@student.1337.ma <msodor>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 12:51:49 by msodor            #+#    #+#             */
-/*   Updated: 2023/03/04 23:22:09 by msodor           ###   ########.fr       */
+/*   Updated: 2023/03/05 15:03:21 by msodor@stud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,12 @@ typedef struct s_player
 	int y;
 } t_player;
 
+void error(void);
 t_map *map(int fd);
-int check_comp(t_map *map);
-int closed_rec(t_map *map);
-char **fill_path(t_map *map, int x, int y);
+void check_comp(t_map *map);
+void closed_rec(t_map *map);
+char **fill_around(t_map *map, int x, int y);
 t_player *position(char **map);
+void	check_map(t_map *map);
 
 #endif

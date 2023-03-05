@@ -13,6 +13,7 @@ GNL = $(addprefix get_next_line/, get_next_line.c get_next_line_utils.c)
 SRC	= map_comp.c \
 		map_shape.c \
 		map_path.c \
+		error.c \
 		so_long.c \
 
 OBJ = $(SRC:.c=.o)
