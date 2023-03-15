@@ -6,7 +6,7 @@
 /*   By: msodor@student.1337.ma <msodor>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 12:51:49 by msodor            #+#    #+#             */
-/*   Updated: 2023/03/05 15:03:21 by msodor@stud      ###   ########.fr       */
+/*   Updated: 2023/03/15 18:41:46 by msodor@stud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 typedef struct s_map
 {
 	char **map;
+	char **map2;
 	int x;
 	int y;
 	int E_count;
@@ -33,12 +34,21 @@ typedef struct s_player
 	int y;
 } t_player;
 
-void error(void);
-t_map *map(int fd);
-void check_comp(t_map *map);
-void closed_rec(t_map *map);
-char **fill_around(t_map *map, int x, int y);
-t_player *position(char **map);
-void	check_map(t_map *map);
+typedef struct s_game
+{
+	t_map map;
+	t_player player;
+} t_player;
+
+
+
+void		error(void);
+void		get_map(int fd, t_map **map);
+void		check_comp(t_map *map);
+void		closed_rec(t_map *map);
+void		fill_around(t_map *map, int x, int y);
+t_player	*position(char **map);
+void		check_map(t_map *map);
+void		check_extention(char *str);
 
 #endif

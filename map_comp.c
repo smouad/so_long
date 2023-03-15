@@ -6,21 +6,18 @@
 /*   By: msodor@student.1337.ma <msodor>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 12:20:18 by msodor            #+#    #+#             */
-/*   Updated: 2023/03/05 13:17:35 by msodor@stud      ###   ########.fr       */
+/*   Updated: 2023/03/15 18:27:09 by msodor@stud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-t_map	*map(int fd)
+void get_map(int fd, t_map **map)
 {
-	t_map		*map;
 	char		*line;
 	static char	*one_line_map;
+	static char	*one_line_map2;
 
-	map = malloc(sizeof(t_map));
-	if (!map)
-		return (NULL);
 	line = get_next_line(fd);
 	while (line)
 	{
@@ -28,10 +25,12 @@ t_map	*map(int fd)
 			error();
 		one_line_map = my_strjoin(one_line_map, line);
 		line = get_next_line(fd);
-		// free(line);
+		free(line);
 	}
-	map->map = ft_split(one_line_map, '\n');
-	return (map);
+	// one_line_map2 = ft_strdup(one_line_map);
+	(*map)->map = ft_split(one_line_map, '\n');
+	(*map)->map2 = ft_split(one_line_map, '\n');
+	
 }
 
 void	check_comp(t_map *map)

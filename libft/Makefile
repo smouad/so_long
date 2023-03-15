@@ -69,9 +69,9 @@ bonus :		${OBJS_BONUS}
 all:		${NAME}
 
 clean:
-			${RM} ${OBJS} ${OBJS_BONUS}
+			@${RM} ${OBJS} ${OBJS_BONUS}
 
 fclean:		clean
-			${RM} ${NAME} ${OBJS_BONUS}
+			@${RM} ${NAME} ${OBJS_BONUS}
 
 re:			fclean all

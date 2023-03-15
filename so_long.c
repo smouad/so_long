@@ -12,26 +12,37 @@
 
 #include "so_long.h"
 
-void	check_all(t_map *map_info)
+void	check_all(t_map *map)
 {
 	t_player *player;
 
-	player = position(map_info->map);
-	closed_rec(map_info);
-	check_comp(map_info);
-	map_info->map = fill_around(map_info, player->x, player->y);
-	check_map(map_info);
+	// player = position(map->map);
+	// closed_rec(map);
+	// check_comp(map);
+	// fill_around(map, player->x, player->y);
+	// check_map(map);
 }
+
 int main(int ac, char **av)
 {
-	t_map *map_info;
+	t_map *map;
+	if (ac != 2)
+		exit(0);
+	check_extention(av[1]);
+	map = malloc(sizeof(t_map));
 	int fd = open(av[1], O_RDONLY);
-	map_info = map(fd);
-	check_all(map_info);
+	get_map(fd, &map);
+	check_all(map);
 	int i = 0;
-	while (map_info->map[i])
+	while (map->map[i])
 	{
-		printf("%s\n", map_info->map[i]);
+		printf("%s\n", map->map[i]);
+		i++;
+	}
+	i = 0;
+	while (map->map2[i])
+	{
+		printf("%s\n", map->map2[i]);
 		i++;
 	}
 }
