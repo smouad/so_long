@@ -12,60 +12,59 @@
 
 #include "so_long.h"
 
-t_player	*position(char **map)
+int	position(t_game game)
 {
-	t_player	*player;
-
-	player->y = 0;
-	while (map[player->y])
+	game.player_y = 0;
+	while (game.map[game.player_y])
 	{
-		player->x = 0;
-		while (map[player->y][player->x])
+		game.player_x = 0;
+		while (game.map[game.player_y][game.player_x])
 		{
-			if (map[player->y][player->x] == 'P')
-				return (player);
-			player->x++;
+			if (game.map[game.player_y][game.player_x] == 'P')
+				return(0);
+			game.player_x++;
 		}
-		player->y++;
+		game.player_y++;
 	}
-	return (0);
+	return 0;
 }
 
-// void	fill_around(t_map *map, int x, int y)
-// {
-// 	map->map2[y][x] = 'X';
-// 	printf("me\n");
-// 	if (ft_strchr("0EC", map->map2[y - 1][x]))
-// 		fill_around(map, x, y - 1);
-// 	if (ft_strchr("0EC", map->map2[y + 1][x]))
-// 		fill_around(map, x, y + 1);
-// 	if (ft_strchr("0EC", map->map2[y][x + 1]))
-// 		fill_around(map, x + 1, y);
-// 	if (ft_strchr("0EC", map->map2[y][x - 1]))
-// 		fill_around(map, x - 1, y);
-// }
-
-void	check_map(t_map *map)
+void	fill_around(t_game game, int x, int y)
 {
-	map->y = 0;
-	map->P_count = 0;
-	map->E_count = 0;
-	map->C_count = 0;
-	while (map->map[map->y])
+	position(game);
+	game.map[y][x] = 'X';
+		printf("me\n");
+	if (ft_strchr("0EC", game.map[y - 1][x]))
+		fill_around(game, x, y - 1);
+	if (ft_strchr("0EC", game.map[y + 1][x]))
+		fill_around(game, x, y + 1);
+	if (ft_strchr("0EC", game.map[y][x + 1]))
+		fill_around(game, x + 1, y);
+	if (ft_strchr("0EC", game.map[y][x - 1]))
+		fill_around(game, x - 1, y);
+}
+
+void	check_map(t_game game)
+{
+	game.y = 0;
+	game.P_count = 0;
+	game.E_count = 0;
+	game.C_count = 0;
+	while (game.map[game.y])
 	{
-		map->x = 0;
-		while (map->map[map->y][map->x])
+		game.x = 0;
+		while (game.map[game.y][game.x])
 		{
-			if (map->map[map->y][map->x] == 'P')
-				map->P_count++;
-			if (map->map[map->y][map->x] == 'E')
-				map->E_count++;
-			if (map->map[map->y][map->x] == 'C')
-				map->C_count++;
-			map->x++;
+			if (game.map[game.y][game.x] == 'P')
+				game.P_count++;
+			if (game.map[game.y][game.x] == 'E')
+				game.E_count++;
+			if (game.map[game.y][game.x] == 'C')
+				game.C_count++;
+			game.x++;
 		}
-		map->y++;
+		game.y++;
 	}
-	if (map->C_count != 0 || map->E_count != 0 || map->P_count != 0)
+	if (game.C_count != 0 || game.E_count != 0 || game.P_count != 0)
 		error();
 }

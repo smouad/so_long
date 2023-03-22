@@ -6,13 +6,13 @@
 /*   By: msodor@student.1337.ma <msodor>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 12:20:18 by msodor            #+#    #+#             */
-/*   Updated: 2023/03/15 18:27:09 by msodor@stud      ###   ########.fr       */
+/*   Updated: 2023/03/22 15:23:39 by msodor@stud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void get_map(int fd, t_map **map)
+void get_map(int fd, t_game *game)
 {
 	char		*line;
 	static char	*one_line_map;
@@ -27,35 +27,34 @@ void get_map(int fd, t_map **map)
 		line = get_next_line(fd);
 		free(line);
 	}
+	game->map = ft_split(one_line_map, '\n');
 	// one_line_map2 = ft_strdup(one_line_map);
-	(*map)->map = ft_split(one_line_map, '\n');
-	(*map)->map2 = ft_split(one_line_map, '\n');
-	
+	// game->map2 = ft_split(one_line_map2, '\n');
 }
 
-void	check_comp(t_map *map)
+void	check_comp(t_game game)
 {
-	map->y = 0;
-	map->P_count = 0;
-	map->E_count = 0;
-	map->C_count = 0;
-	while (map->map[map->y])
+	game.y = 0;
+	game.P_count = 0;
+	game.E_count = 0;
+	game.C_count = 0;
+	while (game.map[game.y])
 	{
-		map->x = 0;
-		while (map->map[map->y][map->x])
+		game.x = 0;
+		while (game.map[game.y][game.x])
 		{
-			if (ft_strchr("01CPE", map->map[map->y][map->x]) == 0)
+			if (ft_strchr("01CPE", game.map[game.y][game.x]) == 0)
 				error();
-			if (map->map[map->y][map->x] == 'P')
-				map->P_count++;
-			if (map->map[map->y][map->x] == 'E')
-				map->E_count++;
-			if (map->map[map->y][map->x] == 'C')
-				map->C_count++;
-			map->x++;
+			if (game.map[game.y][game.x] == 'P')
+				game.P_count++;
+			if (game.map[game.y][game.x] == 'E')
+				game.E_count++;
+			if (game.map[game.y][game.x] == 'C')
+				game.C_count++;
+			game.x++;
 		}
-		map->y++;
+		game.y++;
 	}
-	if (map->C_count == 0 || map->E_count != 1 || map->P_count != 1)
+	if (game.C_count == 0 || game.E_count != 1 || game.P_count != 1)
 		error();
 }

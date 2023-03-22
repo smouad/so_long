@@ -6,7 +6,7 @@
 /*   By: msodor@student.1337.ma <msodor>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 12:51:49 by msodor            #+#    #+#             */
-/*   Updated: 2023/03/15 18:41:46 by msodor@stud      ###   ########.fr       */
+/*   Updated: 2023/03/22 14:58:24 by msodor@stud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,38 +17,26 @@
 #include "libft/libft.h"
 #include <stdlib.h>
 
-typedef struct s_map
+typedef struct s_gmae
 {
 	char **map;
 	char **map2;
+	int player_x;
+	int player_y;
 	int x;
 	int y;
 	int E_count;
 	int P_count;
 	int C_count;
-} t_map;
+} t_game;
 
-typedef struct s_player
-{
-	int x;
-	int y;
-} t_player;
-
-typedef struct s_game
-{
-	t_map map;
-	t_player player;
-} t_player;
-
-
-
-void		error(void);
-void		get_map(int fd, t_map **map);
-void		check_comp(t_map *map);
-void		closed_rec(t_map *map);
-void		fill_around(t_map *map, int x, int y);
-t_player	*position(char **map);
-void		check_map(t_map *map);
-void		check_extention(char *str);
+void	error(void);
+void	get_map(int fd, t_game *game);
+void	check_comp(t_game game);
+void	closed_rec(t_game *game);
+void	fill_around(t_game game, int x, int y);
+int	position(t_game game);
+void	check_map(t_game game);
+void	check_extention(char *str);
 
 #endif

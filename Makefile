@@ -34,5 +34,5 @@ clean :
 	@make clean -C libft
 	@echo "Done."
 fclean : clean
-	$(RM) $(NAME)
+	@$(RM) $(NAME)
 re : clean all
