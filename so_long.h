@@ -6,7 +6,7 @@
 /*   By: msodor@student.1337.ma <msodor>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 12:51:49 by msodor            #+#    #+#             */
-/*   Updated: 2023/03/22 14:58:24 by msodor@stud      ###   ########.fr       */
+/*   Updated: 2023/03/23 14:43:31 by msodor@stud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "libft/libft.h"
 #include <stdlib.h>
 
-typedef struct s_gmae
+typedef struct s_game
 {
 	char **map;
 	char **map2;
@@ -32,11 +32,11 @@ typedef struct s_gmae
 
 void	error(void);
 void	get_map(int fd, t_game *game);
-void	check_comp(t_game game);
-void	closed_rec(t_game *game);
+void	position(t_game *game);
 void	fill_around(t_game game, int x, int y);
-int	position(t_game game);
-void	check_map(t_game game);
+void	check_comp(t_game game);
+void	check_shape(t_game game);
+void	check_path(t_game *game);
 void	check_extention(char *str);
 
 #endif

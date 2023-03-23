@@ -29,10 +29,8 @@ $(LIBFT):
 	make -C libft
 
 clean :
-	@echo "Cleaning object files ..." 
-	@$(RM) $(OBJ) $(GNLOBJ)
-	@make clean -C libft
-	@echo "Done."
+	$(RM) $(OBJ) $(GNLOBJ)
+	make clean -C libft
 fclean : clean
-	@$(RM) $(NAME)
+	$(RM) $(NAME)
 re : clean all

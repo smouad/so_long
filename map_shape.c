@@ -12,25 +12,25 @@
 
 #include "so_long.h"
 
-void	closed_rec(t_map *map)
+void	check_shape(t_game game)
 {
 	int	len;
 
-	map->y = 0;
-	map->x = 0;
-	while (map->map[map->y + 1])
+	game.y = 0;
+	game.x = 0;
+	while (game.map[game.y + 1])
 	{
-		len = ft_strlen(map->map[map->y]);
-		if (len != ft_strlen(map->map[map->y + 1]))
+		len = ft_strlen(game.map[game.y]);
+		if (len != ft_strlen(game.map[game.y + 1]))
 			error();
-		if (map->map[map->y][0] != '1' || map->map[map->y][len - 1] != '1')
+		if (game.map[game.y][0] != '1' || game.map[game.y][len - 1] != '1')
 			error();
-		map->y++;
+		game.y++;
 	}
-	while (map->map[0][map->x] && map->map[map->y][map->x])
+	while (game.map[0][game.x] && game.map[game.y][game.x])
 	{
-		if (map->map[0][map->x] != '1' || map->map[map->y][map->x] != '1')
+		if (game.map[0][game.x] != '1' || game.map[game.y][game.x] != '1')
 			error();
-		map->x++;
+		game.x++;
 	}
 }

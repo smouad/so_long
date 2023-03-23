@@ -6,7 +6,7 @@
 /*   By: msodor@student.1337.ma <msodor>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 12:20:18 by msodor            #+#    #+#             */
-/*   Updated: 2023/03/22 15:23:39 by msodor@stud      ###   ########.fr       */
+/*   Updated: 2023/03/23 14:43:24 by msodor@stud      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 void get_map(int fd, t_game *game)
 {
 	char		*line;
-	static char	*one_line_map;
-	static char	*one_line_map2;
+	char	*one_line_map;
 
 	line = get_next_line(fd);
+	if (line == NULL)
+		error();
 	while (line)
 	{
 		if (!ft_strncmp("\n", line, 1))
@@ -28,8 +29,8 @@ void get_map(int fd, t_game *game)
 		free(line);
 	}
 	game->map = ft_split(one_line_map, '\n');
-	// one_line_map2 = ft_strdup(one_line_map);
-	// game->map2 = ft_split(one_line_map2, '\n');
+	game->map2 = ft_split(one_line_map, '\n');
+	position(game);
 }
 
 void	check_comp(t_game game)
