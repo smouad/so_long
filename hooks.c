@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/05 13:06:47 by msodor@stud       #+#    #+#             */
-/*   Updated: 2023/03/28 15:57:22 by msodor           ###   ########.fr       */
+/*   Created: 2023/03/27 13:49:20 by msodor@stud       #+#    #+#             */
+/*   Updated: 2023/03/27 14:13: by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	my_free(char **str)
+int	press_cross(int key_code, t_game *game)
 {
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		free(str[i]);
-		i++;
-	}
-	free(str);
+	(void) key_code;
+	mlx_destroy_window(game->mlx, game->wind);
+	return (0);
 }
-void	error(void)
+
+int	keypress_listener(int key_code, t_game *game)
 {
-	write(1, "ERROR\n", 6);
-	exit(0);
+	move_handle(key_code, game);
+	if (key_code == 53)
+	{
+		mlx_destroy_window(game->mlx, game->wind);
+		exit(0); 
+	} 
+	return (0); 
 }

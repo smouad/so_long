@@ -1,3 +1,4 @@
+
 NAME = so_long
 
 CC = cc
@@ -16,14 +17,17 @@ SRC	= map_comp.c \
 		map_path.c \
 		error.c \
 		so_long.c \
+		initialising.c \
+		hooks.c \
+		move.c \
 
 
 OBJ = $(SRC:.c=.o)
 
 GNLOBJ = $(GNL:.c=.o)
 
-all : $(LIBFT) $(OBJ) $(GNLOBJ)
-	$(CC) $(FLAGS) $(OBJ) $(GNLOBJ) $(LIBFT) -o $(NAME)
+all : $(LIBFT) $(OBJ) $(GNLOBJ) so_long.h
+	$(CC) $(FLAGS) $(OBJ) $(GNLOBJ) $(LIBFT) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 $(LIBFT):
 	make -C libft

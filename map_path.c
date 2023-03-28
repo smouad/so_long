@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-void	position(t_game *game)
+void	player_position(t_game *game)
 {
 	game->player_y = 0;
 	while (game->map[game->player_y])
@@ -29,17 +29,34 @@ void	position(t_game *game)
 	return ;
 }
 
+void	exit_position(t_game *game)
+{
+	game->exit_y = 0;
+	while (game->map[game->exit_y])
+	{
+		game->exit_x = 0;
+		while (game->map[game->exit_y][game->exit_x])
+		{
+			if (game->map[game->exit_y][game->exit_x] == 'E'\
+			|| game->map[game->exit_y][game->exit_x] == 'e')
+				return ;
+			game->exit_x++;
+		}
+		game->exit_y++;
+	}
+	return ;
+}
+
 void	fill_around(t_game game, int x, int y)
 {
 	game.map2[y][x] = 'X';
-	// printf("%c\n, %d %d", game.map[y + 1][x], y, x);
-	if (ft_strchr("0EC", game.map2[y - 1][x]))
+	if (ft_strchr("0C", game.map2[y - 1][x]))
 		fill_around(game, x, y - 1);
-	if (ft_strchr("0EC", game.map2[y + 1][x]))
+	if (ft_strchr("0C", game.map2[y + 1][x]))
 		fill_around(game, x, y + 1);
-	if (ft_strchr("0EC", game.map2[y][x + 1]))
+	if (ft_strchr("0C", game.map2[y][x + 1]))
 		fill_around(game, x + 1, y);
-	if (ft_strchr("0EC", game.map2[y][x - 1]))
+	if (ft_strchr("0C", game.map2[y][x - 1]))
 		fill_around(game, x - 1, y);
 }
 
@@ -47,24 +64,22 @@ void	check_path(t_game *game)
 {
 	fill_around(*game, game->player_x, game->player_y);
 	game->y = 0;
-	game->P_count = 0;
-	game->E_count = 0;
-	game->C_count = 0;
+	game->p_count = 0;
+	game->c_count = 0;
 	while (game->map2[game->y])
 	{
 		game->x = 0;
 		while (game->map2[game->y][game->x])
 		{
 			if (game->map2[game->y][game->x] == 'P')
-				game->P_count++;
-			if (game->map2[game->y][game->x] == 'E')
-				game->E_count++;
+				game->p_count++;
 			if (game->map2[game->y][game->x] == 'C')
-				game->C_count++;
+				game->c_count++;
 			game->x++;
 		}
 		game->y++;
 	}
-	if (game->C_count != 0 || game->E_count != 0 || game->P_count != 0)
+	if (game->c_count != 0 || game->p_count != 0)
 		error();
 }
+
