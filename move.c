@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/27 14:03:21 by msodor            #+#    #+#             */
-/*   Updated: 2023/03/27 14:47:32by msodor           ###   ########.fr       */
+/*   Created: 2023/03/30 14:06:47 by msodor            #+#    #+#             */
+/*   Updated: 2023/03/30 14:12:40 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,11 @@ int	c_count(t_game *game)
 	}
 	return (count);
 }
-void	check_do(t_game	*game)
-{
 
-}
 void	move(int x, int y, t_game *game)
 {
 	int	from_x;
 	int	from_y;
-	int	count = 0;
 
 	from_x = game->player_x;
 	from_y = game->player_y;
@@ -52,6 +48,8 @@ void	move(int x, int y, t_game *game)
 		game->player_y = game->player_y + y;
 		if (game->map[game->player_y][game->player_x] == 'C')
 			game->c_count--;
+		if (game->map[game->player_y][game->player_x] == 'e')
+			win(game);
 		game->map[from_y][from_x] = '0';
 		game->map[game->player_y][game->player_x] = 'P';
 		mlx_clear_window(game->mlx, game->wind);
@@ -59,22 +57,15 @@ void	move(int x, int y, t_game *game)
 		fill_screen(*game);
 		if (game->c_count == 0)
 			game->map[game->exit_y][game->exit_x] = 'e';
-		// else if (game->map[game->player_y][game->player_x] == 'e')
-		// {
-
-		// 	printf("you won\n");
-		// 	// mlx_destroy_window(game->mlx, game->wind);
-		// 	// exit(0);
-		// }
+		game->moves++;
+		ft_printf("number of movements:%d\n", game->moves);
 	}
-		count++;
-			printf("moves:%d\n", count);
 }
 
 void	move_handle(int keycode, t_game *game)
 {
 	if (keycode == W || keycode == 126)
-		move(0, -1, game);	
+		move(0, -1, game);
 	if (keycode == S || keycode == 125)
 		move(0, 1, game);
 	if (keycode == A || keycode == 123)

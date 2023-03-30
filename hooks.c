@@ -12,10 +12,21 @@
 
 #include "so_long.h"
 
-int	press_cross(int key_code, t_game *game)
+void	destroy(t_game *game)
 {
-	(void) key_code;
 	mlx_destroy_window(game->mlx, game->wind);
+	exit(0);
+}
+
+void	win(t_game *game)
+{
+	ft_printf("You won\n");
+	destroy(game);
+}
+
+int	press_cross(t_game *game)
+{
+	destroy(game);
 	return (0);
 }
 
@@ -23,9 +34,6 @@ int	keypress_listener(int key_code, t_game *game)
 {
 	move_handle(key_code, game);
 	if (key_code == 53)
-	{
-		mlx_destroy_window(game->mlx, game->wind);
-		exit(0); 
-	} 
-	return (0); 
+		destroy(game);
+	return (0);
 }

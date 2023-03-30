@@ -62,6 +62,7 @@ void	fill_around(t_game game, int x, int y)
 
 void	check_path(t_game *game)
 {
+	exit_position(game);
 	fill_around(*game, game->player_x, game->player_y);
 	game->y = 0;
 	game->p_count = 0;
@@ -79,7 +80,10 @@ void	check_path(t_game *game)
 		}
 		game->y++;
 	}
-	if (game->c_count != 0 || game->p_count != 0)
+	if ((game->c_count != 0 || game->p_count != 0)
+		|| !(game->map2[game->exit_y + 1][game->exit_x] == 'X'
+		|| game->map2[game->exit_y - 1][game->exit_x] == 'X'
+		|| game->map2[game->exit_y][game->exit_x + 1] == 'X'
+		|| game->map2[game->exit_y][game->exit_x - 1] == 'X'))
 		error();
 }
-

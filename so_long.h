@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 12:51:49 by msodor            #+#    #+#             */
-/*   Updated: 2023/03/28 15:05:51 by msodor           ###   ########.fr       */
+/*   Updated: 2023/03/30 14:11:54 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "get_next_line/get_next_line.h"
 # include "libft/libft.h"
+# include "ft_printf/ft_printf.h"
 # include <stdlib.h>
 # include <mlx.h>
 
@@ -22,7 +23,6 @@
 # define S 1
 # define D 2
 # define W 13
-
 
 typedef struct s_img
 {
@@ -66,6 +66,7 @@ typedef struct s_game
 	t_img	exit;
 	t_img	coin;
 	t_fill	f;
+	int		moves;
 }	t_game;
 
 void	error(void);
@@ -80,9 +81,11 @@ void	check_path(t_game *game);
 void	check_extention(char *str);
 
 void	game_init(t_game *game);
+void	destroy(t_game *game);
+void	win(t_game *game);
 void	images(t_game *game);
 void	fill_screen(t_game game);
-int		press_cross(int key_code, t_game *game);
+int		press_cross(t_game *game);
 int		keypress_listener(int key_code, t_game *game);
 void	move_handle(int keycode, t_game *game);
 

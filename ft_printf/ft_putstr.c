@@ -1,34 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   file_extention.c                                   :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/11 19:47:08 by msodor@stud       #+#    #+#             */
-/*   Updated: 2023/03/30 14:00:14 by msodor           ###   ########.fr       */
+/*   Created: 2022/10/30 21:29:20 by msodor            #+#    #+#             */
+/*   Updated: 2022/11/01 19:58:00 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "ft_printf.h"
 
-void	check_extention(char *str)
+void	ft_putstr(char *str, int *counter)
 {
-	char	*s;
-	char	*ext;
-	int		i;
+	int	i;
 
 	i = 0;
-	s = ft_strchr(str, '.');
-	if (!s)
-		error();
-	if (ft_strlen(str) <= 4 || ft_strlen(s) > 4)
-		error();
-	ext = ".ber";
-	while (s[i] && ext[i])
+	if (str == NULL)
 	{
-		if (s[i] != ext[i])
-			error();
+		write(1, "(null)", 6);
+		*counter += 6;
+		return ;
+	}
+	while (str[i])
+	{
+		ft_putchar(str[i], counter);
 		i++;
 	}
 }

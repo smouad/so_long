@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 12:20:18 by msodor            #+#    #+#             */
-/*   Updated: 2023/03/28 16:18:58 by msodor           ###   ########.fr       */
+/*   Updated: 2023/03/30 14:02:12 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ char	*join(char *s1, char *s2)
 	free(s2);
 	return (str);
 }
+
 void	get_map(int fd, t_game *game)
 {
 	char	*line;

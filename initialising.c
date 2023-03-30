@@ -6,7 +6,7 @@
 /*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 15:07:16 by msodor@stud       #+#    #+#             */
-/*   Updated: 2023/03/28 15:29:54 by msodor           ###   ########.fr       */
+/*   Updated: 2023/03/30 13:12:30 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,15 @@ void	game_init(t_game *game)
 void	images(t_game *game)
 {
 	game->wall.img = mlx_xpm_file_to_image(game->mlx, \
-		"./imgs/wall.xpm", &game->wall.img_w, &game->wall.img_h);
+		"./textures/wall.xpm", &game->wall.img_w, &game->wall.img_h);
 	game->hero.img = mlx_xpm_file_to_image(game->mlx, \
-		"./imgs/hero.xpm", &game->hero.img_w, &game->hero.img_h);
+		"./textures/hero.xpm", &game->hero.img_w, &game->hero.img_h);
 	game->bg.img = mlx_xpm_file_to_image(game->mlx, \
-		"./imgs/bg.xpm", &game->bg.img_w, &game->bg.img_h);
+		"./textures/bg.xpm", &game->bg.img_w, &game->bg.img_h);
 	game->coin.img = mlx_xpm_file_to_image(game->mlx, \
-		"./imgs/coin.xpm", &game->coin.img_w, &game->coin.img_h);
+		"./textures/coin.xpm", &game->coin.img_w, &game->coin.img_h);
 	game->exit.img = mlx_xpm_file_to_image(game->mlx, \
-		"./imgs/exit.xpm", &game->exit.img_w, &game->exit.img_h);
+		"./textures/exit.xpm", &game->exit.img_w, &game->exit.img_h);
 	if (!game->wall.img || !game->bg.img || !game->coin.img || !game->exit.img \
 		|| !game->hero.img)
 		error();

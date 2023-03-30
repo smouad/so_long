@@ -1,32 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   ft_putnbr_u.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/05 13:06:47 by msodor@stud       #+#    #+#             */
-/*   Updated: 2023/03/30 14:16:49 by msodor           ###   ########.fr       */
+/*   Created: 2022/10/31 21:44:30 by msodor            #+#    #+#             */
+/*   Updated: 2022/11/01 19:56:13 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "ft_printf.h"
 
-void	my_free(char **str)
+void	ft_putnbr_u(unsigned int n, int *counter)
 {
-	int	i;
-
-	i = 0;
-	while (str[i])
+	if (n < 10)
+		ft_putchar(n + '0', counter);
+	else
 	{
-		free(str[i]);
-		i++;
+		ft_putnbr_u(n / 10, counter);
+		ft_putnbr_u(n % 10, counter);
 	}
-	free(str);
-}
-
-void	error(void)
-{
-	ft_printf("ERROR\n");
-	exit(0);
 }

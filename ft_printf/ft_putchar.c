@@ -1,32 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msodor <msodor@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: msodor <msodor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/05 13:06:47 by msodor@stud       #+#    #+#             */
-/*   Updated: 2023/03/30 14:16:49 by msodor           ###   ########.fr       */
+/*   Created: 2022/10/30 21:28:15 by msodor            #+#    #+#             */
+/*   Updated: 2022/10/31 17:11:27 by msodor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "ft_printf.h"
 
-void	my_free(char **str)
+void	ft_putchar(char c, int *counter)
 {
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		free(str[i]);
-		i++;
-	}
-	free(str);
-}
-
-void	error(void)
-{
-	ft_printf("ERROR\n");
-	exit(0);
+	write(1, &c, 1);
+	(*counter)++;
 }
