@@ -15,6 +15,14 @@
 void	destroy(t_game *game)
 {
 	mlx_destroy_window(game->mlx, game->wind);
+	mlx_destroy_image(game->mlx, game->hero.img);
+	mlx_destroy_image(game->mlx, game->bg.img);
+	mlx_destroy_image(game->mlx, game->wall.img);
+	mlx_destroy_image(game->mlx, game->coin.img);
+	mlx_destroy_image(game->mlx, game->exit.img);
+	my_free(game->map);
+	my_free(game->map2);
+	free(game->mlx);
 	exit(0);
 }
 
